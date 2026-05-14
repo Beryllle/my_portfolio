@@ -1,0 +1,264 @@
+/* Custom Properties - 高级弥散渐变 & 毛玻璃主题 */
+:root {
+    --text-main: #1d1d1f;       /* 苹果风高级黑 */
+    --text-muted: #515154;      /* 优雅的次级文字灰 */
+    --primary-color: #4a6ee0;   /* 主题蓝紫色 */
+    --primary-hover: #3658c9;
+    --glass-bg: rgba(255, 255, 255, 0.45);        /* 毛玻璃背景 */
+    --glass-bg-hover: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.6);     /* 毛玻璃高光边框 */
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05); /* 极软阴影 */
+    --border-radius-lg: 24px;
+    --border-radius-md: 16px;
+    --border-radius-sm: 8px;
+}
+
+/* 全局基础设置 */
+body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow: hidden; 
+    
+    /* 核心！高级动态弥散渐变背景 */
+    background-color: #f0f2f5;
+    background-image: 
+        radial-gradient(at 10% 0%, hsla(228, 100%, 88%, 1) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, hsla(262, 100%, 90%, 1) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(333, 100%, 93%, 1) 0px, transparent 50%),
+        radial-gradient(at 80% 50%, hsla(202, 100%, 88%, 1) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(30, 100%, 91%, 1) 0px, transparent 50%),
+        radial-gradient(at 80% 100%, hsla(242, 100%, 85%, 1) 0px, transparent 50%);
+    background-size: 200% 200%;
+    animation: gradientMeshMove 25s ease infinite alternate;
+}
+
+/* 背景缓慢流动动画 */
+@keyframes gradientMeshMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 100%; }
+}
+
+/* 排版优化 */
+h1, h2, h3, h4 {
+    color: var(--text-main);
+    margin-top: 0;
+    font-weight: 600;
+}
+h1 { font-size: 2.2em; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+h2 { font-size: 1.8em; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--glass-border); }
+h3 { font-size: 1.4em; margin-top: 32px; margin-bottom: 16px; color: var(--primary-color); }
+h4 { font-size: 1.1em; font-weight: 600; margin-bottom: 12px; color: var(--text-main); }
+
+p, li { color: var(--text-muted); }
+a { color: var(--primary-color); text-decoration: none; transition: all 0.3s ease; }
+a:hover { color: var(--primary-hover); }
+
+/* 页面整体布局 */
+.main-layout {
+    display: flex;
+    height: 100vh;
+    max-width: 1440px; /* 控制超大屏的宽度，更有呼吸感 */
+    margin: 0 auto;
+}
+
+/* 隐藏原生粗糙滚动条，改为高级细线 */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+/* 左侧固定个人信息栏 */
+.left-panel {
+    flex: 0 0 320px;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    /* 毛玻璃效果 */
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-right: 1px solid var(--glass-border);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.02);
+    z-index: 10;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 改为左对齐，更显高级排版 */
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.8);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.profile-photo:hover { transform: scale(1.05) rotate(3deg); }
+
+.profile-info h1 { margin-bottom: 4px; }
+.profile-info h2 { font-size: 1.1em; color: var(--text-muted); font-weight: 500; margin-bottom: 24px; }
+.profile-info h3 { font-size: 1.1em; border-bottom: 1px solid var(--glass-border); padding-bottom: 8px; margin-top: 24px; }
+.profile-info ul { padding-left: 16px; margin-bottom: 20px; }
+.profile-info li { margin-bottom: 12px; font-size: 0.95em; line-height: 1.6; }
+
+/* 右侧滚动内容区 */
+.right-panel {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 80px 8%;
+    box-sizing: border-box;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+/* 顶部悬浮导航（胶囊样式） */
+.navbar {
+    position: fixed;
+    top: 30px;
+    right: 6%;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    padding: 8px 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.navbar nav { display: flex; gap: 8px; }
+
+.navbar a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95em;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar a:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.navbar a.active {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(74, 110, 224, 0.3);
+}
+
+/* 每一块述职内容卡片 */
+.content-section {
+    padding: 40px;
+    margin-bottom: 40px;
+    border-radius: var(--border-radius-lg);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.content-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* 内部二级卡片模块 */
+.sub-section-item {
+    margin-bottom: 30px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--glass-border);
+    transition: background 0.3s ease;
+}
+.sub-section-item:hover {
+    background: var(--glass-bg-hover);
+}
+
+/* 媒体库：图片与视频展示 */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.image-gallery img, .video-container video {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    object-fit: cover;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* 工作流列表排版 */
+.workflow {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+}
+.workflow li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 16px 24px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--glass-border);
+}
+.workflow li span {
+    flex: 1;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-right: 20px;
+}
+.workflow-image {
+    width: 200px;
+    height: auto;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* 移动端/小屏幕自适应 */
+@media (max-width: 1024px) {
+    .main-layout { flex-direction: column; height: auto; overflow-y: visible; }
+    body { overflow-y: auto; overflow-x: hidden; }
+    .left-panel { 
+        width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--glass-border); 
+        padding: 40px 20px; position: relative; z-index: 1;
+    }
+    .right-panel { width: 100%; height: auto; padding: 100px 20px 40px; overflow-y: visible; }
+    .navbar { 
+        top: 20px; right: 50%; transform: translateX(50%); width: max-content; 
+    }
+}
+
+@media (max-width: 768px) {
+    .content-section { padding: 24px; }
+    .sub-section-item { padding: 16px; }
+    .workflow li { flex-direction: column; align-items: flex-start; }
+    .workflow li span { margin-bottom: 12px; margin-right: 0; }
+    .workflow-image { width: 100%; }
+}
