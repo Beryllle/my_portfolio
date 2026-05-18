@@ -14,46 +14,24 @@
             margin: 0; padding: 0;
             overflow-x: hidden;
             color: #D7E2EA;
+            scroll-behavior: smooth;
         }
-
         .hero-heading {
             background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        /* 蓝色系科技感渐变 */
         .gradient-btn {
             background: linear-gradient(123deg, #0A192F 7%, #005A9C 37%, #0088CC 72%, #00CED1 100%);
             box-shadow: 0px 4px 10px rgba(0, 206, 209, 0.3), inset 4px 4px 12px #005A9C;
             border: 2px solid rgba(255, 255, 255, 0.8);
         }
-
-        .sticky-card { position: sticky; transition: transform 0.3s ease; }
         
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0C0C0C; }
         ::-webkit-scrollbar-thumb { background: #D7E2EA40; border-radius: 10px; }
-
-        /* 工作流步骤连线箭头样式 */
-        .workflow-step { position: relative; }
-        @media (min-width: 768px) {
-            .workflow-step:not(:nth-child(3n)):not(:last-child)::after {
-                content: '→';
-                position: absolute; top: 45%; right: -30px; transform: translateY(-50%);
-                color: rgba(255, 255, 255, 0.3); font-size: 24px; font-weight: 300;
-            }
-        }
-        @media (max-width: 767px) {
-            .workflow-step:not(:last-child)::after {
-                content: '↓';
-                position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
-                color: rgba(255, 255, 255, 0.3); font-size: 20px;
-            }
-        }
-
-        /* 滚动渐显动画 */
+        
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -64,47 +42,59 @@
             transform: translateY(0);
         }
         .delay-100 { transition-delay: 100ms; }
+
+        .flow-arrow {
+            position: absolute;
+            top: 50%;
+            right: -2.5rem; 
+            transform: translateY(-50%);
+            color: #00CED1;
+            font-size: 1.5rem;
+        }
+        @media (max-width: 767px) {
+            .flow-arrow {
+                top: auto;
+                bottom: -2rem;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%) rotate(90deg);
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-[#D7E2EA] selection:text-[#0C0C0C] relative">
 
-    <!-- 1. 高级渐变光晕 (缩小范围：400px，降低发散 blur-[80px]) -->
     <div id="cursor-glow" class="fixed top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none z-[9999] opacity-60 blur-[80px]" 
          style="background: radial-gradient(circle, rgba(0,206,209,0.5) 0%, rgba(0,90,156,0.5) 40%, rgba(12,12,12,0) 80%); transform: translate3d(-50%, -50%, 0); will-change: transform;">
     </div>
 
-    <!-- 主内容 -->
     <div class="relative z-10">
-        <!-- 1. HERO SECTION -->
         <section class="h-screen flex flex-col justify-between px-6 md:px-10 pt-6 md:pt-8 relative overflow-hidden reveal active">
             <nav class="flex justify-between items-center text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg z-20">
-                <a href="#about" class="hover:opacity-70 transition duration-200">关于我</a>
+                <a href="#introduction" class="hover:opacity-70 transition duration-200">自我介绍</a>
                 <a href="#cognition" class="hover:opacity-70 transition duration-200">岗位认知</a>
-                <a href="#projects" class="hover:opacity-70 transition duration-200">工作回顾</a>
-                <a href="#ai" class="hover:opacity-70 transition duration-200">AI探索</a>
+                <a href="#report" class="hover:opacity-70 transition duration-200">工作汇报</a>
+                <a href="#reflection" class="hover:opacity-70 transition duration-200">复盘展望</a>
             </nav>
-
             <div class="absolute left-1/2 top-[48%] -translate-x-1/2 -translate-y-1/2 z-10 w-[240px] sm:w-[320px] md:w-[650px]">
                 <img src="your-photo.png" alt="王雪萌" class="w-full object-cover rounded-full border-4 border-[#D7E2EA]/20 shadow-2xl">
             </div>
-
             <div class="z-20 w-full relative mt-auto mb-10 text-center md:text-left">
                 <h1 class="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap text-[15vw] sm:text-[16vw] lg:text-[14vw]">
                     XUEMENG
                 </h1>
                 <div class="flex flex-col md:flex-row justify-between items-center md:items-end mt-4 md:mt-0 gap-6">
                     <p class="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[280px] text-center md:text-left text-sm md:text-base">
-                       
+                        
                     </p>
-                    <a href="#reflection" class="gradient-btn text-white font-medium uppercase tracking-widest rounded-full px-8 py-3 text-xs md:text-sm hover:scale-105 transition-transform duration-300 shadow-xl">
-                        复盘展望
+                    <a href="#next-steps" class="gradient-btn text-white font-medium uppercase tracking-widest rounded-full px-8 py-3 text-xs md:text-sm hover:scale-105 transition-transform duration-300 shadow-xl">
+                        下一步行动
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- 2. ABOUT SECTION -->
-        <section id="about" class="min-h-[80vh] flex flex-col justify-center items-center px-6 md:px-10 py-20 bg-black/20 backdrop-blur-sm">
+        <section id="introduction" class="min-h-[80vh] flex flex-col justify-center items-center px-6 md:px-10 py-20 bg-black/20 backdrop-blur-sm">
             <h2 class="hero-heading font-black uppercase leading-none tracking-tight text-[10vw] sm:text-[8vw] mb-12 text-center reveal">
                 ABOUT ME
             </h2>
@@ -131,348 +121,151 @@
             </div>
         </section>
 
-        <!-- 3. SERVICES (岗位认知) -->
         <section id="cognition" class="bg-white text-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[60px] px-6 md:px-10 py-24 z-30 relative -mt-10">
-            <h2 class="font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-4 leading-none reveal">POSITION</h2>
-            <p class="text-center font-medium text-lg text-gray-500 mb-16 reveal delay-100">HIIC 的内容渠道需要做什么？</p>
+            <h2 class="font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-16 leading-none reveal">POSITION</h2>
             
-            <div class="max-w-5xl mx-auto flex flex-col">
-                <div class="flex flex-col md:flex-row border-b border-black/15 py-10 reveal">
-                    <div class="md:w-1/3 text-[4rem] md:text-[6rem] font-black leading-none mb-4 md:mb-0">01</div>
-                    <div class="md:w-2/3">
-                        <h3 class="font-medium text-xl md:text-2xl uppercase mb-3">布局全域账号矩阵，构建一体化传播阵地</h3>
-                        <p class="font-light opacity-60 text-sm md:text-base leading-relaxed">搭建多平台协同运营的外部账号体系，明确各平台定位、受众画像及专属内容策略，实现全域流量聚合，扩大品牌行业影响力。</p>
+            <div class="max-w-5xl mx-auto flex flex-col gap-12">
+                <div class="flex flex-col md:flex-row items-start border-b border-black/15 pb-8 reveal">
+                    <div class="md:w-1/4 text-5xl md:text-6xl font-black leading-none mb-4 md:mb-0 text-[#0088CC]">01</div>
+                    <div class="md:w-3/4">
+                        <h3 class="font-bold text-xl md:text-2xl uppercase mb-3">成为业务目标的精准转译者</h3>
+                        <p class="font-light opacity-80 text-base md:text-lg leading-relaxed">内容渠道的首要职责是承上启下。它不仅是“美工”，更是业务需求的“视觉翻译官”。这个角色的核心在于，能够以像素级的精准和对业务逻辑的深刻理解，将上游的战略意图、产品特性或活动目标，忠实、高效地转译为下游用户能感知、能理解的视觉语言，确保每一次交付都服务于最终的业务成果。</p>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row border-b border-black/15 py-10 reveal">
-                    <div class="md:w-1/3 text-[4rem] md:text-[6rem] font-black leading-none mb-4 md:mb-0">02</div>
-                    <div class="md:w-2/3">
-                        <h3 class="font-medium text-xl md:text-2xl uppercase mb-3">落地 AI 赋能运营，打造高效内容工作闭环</h3>
-                        <p class="font-light opacity-60 text-sm md:text-base leading-relaxed">依托 AI 工具融入选题策划、视觉物料生成等运营环节，精简工作流程，实现外部账号运营降本增效。</p>
+                <div class="flex flex-col md:flex-row items-start border-b border-black/15 pb-8 reveal">
+                    <div class="md:w-1/4 text-5xl md:text-6xl font-black leading-none mb-4 md:mb-0 text-[#0088CC]">02</div>
+                    <div class="md:w-3/4">
+                        <h3 class="font-bold text-xl md:text-2xl uppercase mb-3">用设计思维重构信息价值</h3>
+                        <p class="font-light opacity-80 text-base md:text-lg leading-relaxed">一个优秀的内容从业者不应止步于被动执行。面对复杂、高密度的信息（如技术PPT、行业报告），岗位的核心价值在于“信息降噪”与“价值锚定”。这意味着需要主动介入前端，用设计思维去解构内容，提炼出最关键的“价值锚点”，并重构信息层级。这本质上是从“执行者”向“共创者”的身份转变，让设计成为一种放大核心信息的策略手段，而非简单的美化工具。</p>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row border-b border-black/15 py-10 reveal">
-                    <div class="md:w-1/3 text-[4rem] md:text-[6rem] font-black leading-none mb-4 md:mb-0">03</div>
-                    <div class="md:w-2/3">
-                        <h3 class="font-medium text-xl md:text-2xl uppercase mb-3">深化内外协同联动，拓宽宣传资源边界</h3>
-                        <p class="font-light opacity-60 text-sm md:text-base leading-relaxed">加强跨部门协作与外部资源链接，联动协同其他业务板块开展联合宣传，全方位展示中心各条线工作成果；整合吸纳外部优质资源。</p>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row border-b border-black/15 py-10 reveal">
-                    <div class="md:w-1/3 text-[4rem] md:text-[6rem] font-black leading-none mb-4 md:mb-0">04</div>
-                    <div class="md:w-2/3">
-                        <h3 class="font-medium text-xl md:text-2xl uppercase mb-3">建立数据驱动机制，实现运营常态化迭代</h3>
-                        <p class="font-light opacity-60 text-sm md:text-base leading-relaxed">搭建常态化数据监测、复盘与优化体系，以数据为依据动态调整内容方向、发布节奏与渠道资源配比，持续提升外部渠道运营质量。</p>
+                <div class="flex flex-col md:flex-row items-start pt-8 reveal">
+                    <div class="md:w-1/4 text-5xl md:text-6xl font-black leading-none mb-4 md:mb-0 text-[#0088CC]">03</div>
+                    <div class="md:w-3/4">
+                        <h3 class="font-bold text-xl md:text-2xl uppercase mb-3">将AIGC从“可能性”变为“生产力”</h3>
+                        <p class="font-light opacity-80 text-base md:text-lg leading-relaxed">在当前环境下，岗位价值的突破口在于拥抱技术带来的生产力变革。AIGC不应仅被视为一种“可能性”的探索，而应被主动改造为服务于具体业务目标的“生产力工具”。岗位的价值在于，能够主动建立一套可衡量、可复用的“AI+内容”工作流，通过量化指标（如时间缩短、成本降低、产出增加）来证明其为团队带来的实际增益，将前沿探索的价值与业务结果牢牢绑定。</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. PROJECTS (工作回顾) -->
-        <section id="projects" class="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[60px] px-6 md:px-10 py-24 relative z-40 -mt-10 backdrop-blur-md bg-opacity-80">
-            <h2 class="hero-heading font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-20 reveal">PROJECTS</h2>
+        <section id="report" class="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[60px] px-6 md:px-10 py-24 relative z-40 -mt-10 backdrop-blur-md bg-opacity-80">
+            <h2 class="hero-heading font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-20 reveal">WORK REPORT</h2>
+            <div class="max-w-6xl mx-auto space-y-24">
 
-            <div class="max-w-6xl mx-auto relative pb-32">
-                
-                <!-- Card 1 -->
-                <div class="sticky-card bg-[#0C0C0C] border-2 border-[#D7E2EA] rounded-[40px] p-6 md:p-10 mb-8" style="top: 100px; z-index: 1;">
-                    <div class="reveal">
-                        <div class="flex justify-between items-start mb-8">
-                            <div>
-                                <div class="text-[3rem] md:text-[5rem] font-black text-[#D7E2EA] leading-none">01</div>
-                                <h3 class="text-2xl md:text-3xl font-medium uppercase mt-2">品牌规范搭建</h3>
-                            </div>
-                            <div class="hidden md:block rounded-full border-2 border-[#D7E2EA] text-[#D7E2EA] px-6 py-2 text-sm uppercase tracking-widest">DIKI & 招商海报</div>
-                        </div>
-                        
-                        <div class="space-y-8">
-                            <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
-                                <h4 class="text-xl md:text-2xl font-semibold mb-4 text-white">DIKI产业智能分析平台宣传手册</h4>
-                                <p class="text-base font-light opacity-90 mb-3 leading-relaxed">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">工作内容：</strong>为清晰传递DIKI产业智能分析平台核心功能与服务价值，提升对外品牌推介形象，设计DIKI产业平台手册排版。
-                                </p>
-                                <p class="text-base font-light opacity-90 mb-6">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">交付物：</strong>DIKI产业智能分析平台手册
-                                </p>
-                                <!-- 图片缩小为 50% 居中 -->
-                                <img src="diki手册效果.png" alt="DIKI手册" class="w-[80%] md:w-[60%] mx-auto block h-auto object-contain rounded-xl border border-white/10 shadow-lg">
-                            </div>
-                            
-                            <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
-                                <h4 class="text-xl md:text-2xl font-semibold mb-4 text-white">园区招商物料</h4>
-                                <p class="text-base font-light opacity-90 mb-3 leading-relaxed">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">工作内容：</strong>为提升园区招商效率、园区宣传调性，打造中心品牌，对中心与园区业务宣传材料进行制作。
-                                </p>
-                                <p class="text-base font-light opacity-90 mb-6">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">交付物：</strong>园区招商海报
-                                </p>
-                                <img src="园区招商效果图.png" alt="园区招商" class="w-[80%] md:w-[60%] mx-auto block h-auto object-contain rounded-xl border border-white/10 shadow-lg">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="sticky-card bg-[#0C0C0C] border-2 border-[#D7E2EA] rounded-[40px] p-6 md:p-10 mb-8" style="top: 140px; z-index: 2;">
-                    <div class="reveal">
-                        <div class="flex justify-between items-start mb-8">
-                            <div>
-                                <div class="text-[3rem] md:text-[5rem] font-black text-[#D7E2EA] leading-none">02</div>
-                                <h3 class="text-2xl md:text-3xl font-medium uppercase mt-2">活动视觉制作</h3>
-                            </div>
-                            <div class="hidden md:block rounded-full border-2 border-[#D7E2EA] text-[#D7E2EA] px-6 py-2 text-sm uppercase tracking-widest">平面与拍摄</div>
-                        </div>
-                        
-                        <div class="space-y-8">
-                            <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
-                                <h4 class="text-xl md:text-2xl font-semibold mb-4 text-white">海报、展板平面设计</h4>
-                                <p class="text-base font-light opacity-90 mb-3 leading-relaxed">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">工作内容：</strong>为提高宣传效率，重点参与广东省人工智能应用对接大会活动的物料制作。
-                                </p>
-                                <p class="text-base font-light opacity-90 mb-6">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">交付物：</strong>产品海报、主视觉、倒计时、结果复盘等制作，部分使用AI辅助制作。
-                                </p>
-                                <img src="活动物料.png" alt="活动物料" class="w-[80%] md:w-[60%] mx-auto block h-auto object-contain rounded-xl border border-white/10 shadow-lg">
-                            </div>
-                            
-                            <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
-                                <h4 class="text-xl md:text-2xl font-semibold mb-4 text-white">大会宣讲、园区活动拍摄</h4>
-                                <p class="text-base font-light opacity-90 mb-3 leading-relaxed">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">工作内容：</strong>为更好的宣传效率先锋学习，对飞书学习现场进行拍摄记录。效率先锋系列主题视频脚本-分镜-拍摄-剪辑全流程制作。
-                                </p>
-                                <p class="text-base font-light opacity-90 mb-6">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">交付物：</strong>现场拍摄照片、效率先锋系列视频拍摄剪辑
-                                </p>
-                                <img src="效率先锋.png" alt="效率先锋" class="w-[80%] md:w-[60%] mx-auto block h-auto object-contain rounded-xl border border-white/10 shadow-lg">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="sticky-card bg-[#0C0C0C] border-2 border-[#D7E2EA] rounded-[40px] p-6 md:p-10" style="top: 180px; z-index: 3;">
-                    <div class="reveal">
-                        <div class="flex justify-between items-start mb-8">
-                            <div>
-                                <div class="text-[3rem] md:text-[5rem] font-black text-[#D7E2EA] leading-none">03</div>
-                                <h3 class="text-2xl md:text-3xl font-medium uppercase mt-2">渠道方向运营</h3>
-                            </div>
-                            <div class="hidden md:block rounded-full border-2 border-[#D7E2EA] text-[#D7E2EA] px-6 py-2 text-sm uppercase tracking-widest">排版与数据</div>
-                        </div>
-
-                        <div class="space-y-8">
-                            <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
-                                <h4 class="text-xl md:text-2xl font-semibold mb-4 text-white">深国创中心公众号排版</h4>
-                                <p class="text-base font-light opacity-90 mb-3 leading-relaxed">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">工作内容：</strong>深国创中心公众号常态化内容的排版发布，如行业前沿专栏、新材世界、慧研资讯等内容专区的内容排版。
-                                </p>
-                                <p class="text-base font-light opacity-90 mb-6">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">交付物：</strong>公众号推文
-                                </p>
-                                <img src="公众号.png" alt="公众号" class="w-[80%] md:w-[60%] mx-auto block h-auto object-contain rounded-xl border border-white/10 shadow-lg">
-                            </div>
-                            
-                            <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
-                                <h4 class="text-xl md:text-2xl font-semibold mb-4 text-white">渠道侧贴图制作</h4>
-                                <p class="text-base font-light opacity-90 mb-3 leading-relaxed">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">工作内容：</strong>深国创中心公众号有关活动的贴图制作，如活动倒计时、结果复盘、园区招商、节日庆祝等。
-                                </p>
-                                <p class="text-base font-light opacity-90 mb-6">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">交付物：</strong>公众号贴图
-                                </p>
-                                <img src="贴图.png" alt="贴图" class="w-[80%] md:w-[60%] mx-auto block h-auto object-contain rounded-xl border border-white/10 shadow-lg">
-                            </div>
-
-                            <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
-                                <h4 class="text-xl md:text-2xl font-semibold mb-4 text-white">舆情传播收集与统计</h4>
-                                <p class="text-base font-light opacity-90 mb-3 leading-relaxed">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">工作内容：</strong>为精准掌握各类活动对外舆论声量与传播态势，常态化开展全网舆情信息收集，梳理统计传播情况。
-                                </p>
-                                <p class="text-base font-light opacity-90 mb-6">
-                                    <strong class="font-bold text-[#00CED1] tracking-wide">交付物：</strong>舆情统计多维表格
-                                </p>
-                                <img src="舆情.png" alt="舆情" class="w-[80%] md:w-[60%] mx-auto block h-auto object-contain rounded-xl border border-white/10 shadow-lg">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. AI EXPLORATION (AI探索) -->
-        <section id="ai" class="bg-[#0C0C0C] px-6 md:px-10 py-10 relative z-40 border-t border-white/10 bg-opacity-90">
-            <h2 class="hero-heading font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-20 reveal">AI EXPLORATION</h2>
-            
-            <div class="max-w-5xl mx-auto space-y-24">
-                
                 <div class="reveal">
-                    <h3 class="text-3xl font-semibold mb-4 text-white border-l-4 border-[#00CED1] pl-4">AI 海报工作流</h3>
-                    <p class="font-light opacity-80 mb-8">工具：Lovart | 推荐模型：Nano Banana Pro、GPT Image 2</p>
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-white border-l-4 border-[#00CED1] pl-4">一、数据驱动 · 成果总览</h3>
+                    <p class="font-light opacity-80 mb-12 text-lg">一个月内，我的实习成果量化如下：</p>
                     
-                    <div class="mb-10">
-                        <img src="ai海报.png" class="w-[80%] mx-auto block rounded-[20px] shadow-2xl">
-                    </div>
-
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 mb-10">
-                        <h4 class="text-xl mb-4 text-[#D7E2EA] font-semibold border-b border-white/10 pb-3">模型对比</h4>
-                        <p class="font-light opacity-80 mb-6">同样提示词下：</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="space-y-3">
-                                <img src="banana.png" class="w-full h-auto rounded-xl shadow-lg border border-white/5" alt="Nano Banana Pro">
-                                <p class="text-sm font-light opacity-90 leading-relaxed">
-                                    <strong class="text-[#D7E2EA]">Nano Banana Pro：</strong>积分使用便宜，适用于初版图片制作。
-                                </p>
-                            </div>
-                            <div class="space-y-3">
-                                <img src="image2.png" class="w-full h-auto rounded-xl shadow-lg border border-white/5" alt="GPT Image 2">
-                                <p class="text-sm font-light opacity-90 leading-relaxed">
-                                    <strong class="text-[#D7E2EA]">GPT Image 2：</strong>文字效果较好，适用于文字海报制作。
-                                </p>
-                            </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-16">
+                        <div>
+                            <p class="text-6xl md:text-8xl font-black bg-clip-text text-transparent bg-gradient-to-br from-cyan-300 to-blue-500">25</p>
+                            <p class="mt-2 text-base md:text-lg opacity-80 tracking-wider">平面物料设计</p>
+                        </div>
+                        <div>
+                            <p class="text-6xl md:text-8xl font-black bg-clip-text text-transparent bg-gradient-to-br from-cyan-300 to-blue-500">5</p>
+                            <p class="mt-2 text-base md:text-lg opacity-80 tracking-wider">公众号排版</p>
+                        </div>
+                        <div>
+                            <p class="text-6xl md:text-8xl font-black bg-clip-text text-transparent bg-gradient-to-br from-cyan-300 to-blue-500">1</p>
+                            <p class="mt-2 text-base md:text-lg opacity-80 tracking-wider">线下活动拍摄</p>
+                        </div>
+                        <div>
+                            <p class="text-6xl md:text-8xl font-black bg-clip-text text-transparent bg-gradient-to-br from-cyan-300 to-blue-500">1</p>
+                            <p class="mt-2 text-base md:text-lg opacity-80 tracking-wider">视频全流程主导</p>
                         </div>
                     </div>
-
-                    <div class="bg-white/5 rounded-2xl p-6 md:p-8 mb-10 border border-white/10">
-                        <h4 class="text-xl mb-4 text-[#D7E2EA]">应用场景：</h4>
-                        <ul class="list-disc pl-5 opacity-80 space-y-2 font-light text-base">
-                            <li>品牌宣传海报：活动、品牌形象、节点节日、行业主题海报快速生成。</li>
-                            <li>渠道运营物料：公众号头图、配图，小红书封面。</li>
-                            <li>科普/专业内容可视化：行业概念示意图、知识科普场景图。</li>
-                        </ul>
-                    </div>
                     
-                    <div class="space-y-6">
-                        <h4 class="text-xl mb-6 text-[#D7E2EA]">工作流演示：</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
-                            <div class="workflow-step">
-                                <p class="mb-2 opacity-70 font-medium text-base">STEP 1 上传参考图片</p>
-                                <img src="海报1.png" class="w-full rounded-xl border border-white/10 shadow-lg">
+                    <div>
+                        <img src="your-summary-image.png" alt="工作成果汇总图" class="w-full max-w-4xl mx-auto block h-auto object-contain rounded-2xl border-2 border-white/10 shadow-2xl bg-white/5 flex items-center justify-center text-white/40 min-h-[300px]">
+                    </div>
+                </div>
+
+                <div class="border-t border-white/10 pt-16 reveal">
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-12 text-white border-l-4 border-[#00CED1] pl-4">二、深度思考 · 价值挖掘</h3>
+                    
+                    <div class="space-y-16">
+                        <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl">
+                            <h4 class="text-xl md:text-2xl font-semibold mb-6 text-white">A：从0到1的产品海报策划——信息提炼与视觉转译</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <div class="space-y-4 text-base font-light opacity-90 leading-relaxed">
+                                    <p><strong class="font-bold text-[#00CED1] tracking-wide">背景：</strong>接到为“极客智造OPC”与“粤港澳大湾区应用场景创新中心”制作宣传海报的需求。原始材料仅为一份数十页的技术PPT，信息密度大，专业性强。</p>
+                                    <p><strong class="font-bold text-[#00CED1] tracking-wide">我的思考过程：</strong></p>
+                                    <ul class="list-decimal pl-5 space-y-2">
+                                        <li><strong class="text-white">信息降噪，提炼核心价值：</strong>我首先通读了《5G+4T极客智造场景创新中心展示材料》PPT，明确了单纯罗列功能点无法吸引目标客户。我的策略是提炼“黄金卖点”。对于“极客智造OPC”，我将其核心价值提炼为：“先进制造的整合者”、“数字化转型的实践者”和“中小企业成长的赋能者”。</li>
+                                        <li><strong class="text-white">匹配视觉风格，翻译技术语言：</strong>针对提炼出的价值点，我为海报选择了深蓝+亮青的科技色系。构图上，通过模块化的信息分区，将“核心服务”、“生态优势”、“赋能模式”等关键信息以图文并茂的形式清晰呈现，让复杂的B端业务逻辑一目了然。</li>
+                                    </ul>
+                                    <p><strong class="font-bold text-[#00CED1] tracking-wide">成果：</strong>最终的海报设计稿，不再是技术功能的堆砌，而是价值主张的清晰传达，有效支撑了产品的市场推广。</p>
+                                </div>
+                                <img src="产品海报.png" alt="产品海报" class="w-full h-auto object-contain rounded-xl border border-white/10 shadow-lg">
                             </div>
-                            <div class="workflow-step">
-                                <p class="mb-2 opacity-70 font-medium text-base">STEP 2 输入提示词</p>
-                                <img src="海报2.png" class="w-full rounded-xl border border-white/10 shadow-lg">
-                            </div>
-                            <div class="workflow-step">
-                                <p class="mb-2 opacity-70 font-medium text-base">STEP 3 选择模型</p>
-                                <img src="海报3.png" class="w-full rounded-xl border border-white/10 shadow-lg">
+                        </div>
+
+                        <div class="bg-cover bg-center rounded-2xl border border-white/10 relative" style="background-image: url('舆情.png');">
+                            <div class="bg-black/80 p-6 md:p-8 rounded-2xl">
+                                <h4 class="text-xl md:text-2xl font-semibold mb-6 text-white">B：从数据到洞察——舆情分析与GEO工作流构想</h4>
+                                <div class="space-y-4 text-base font-light opacity-90 leading-relaxed">
+                                     <p><strong class="font-bold text-[#00CED1] tracking-wide">工作背景：</strong>完成了常规的舆情收集与数据统计工作。</p>
+                                    <p><strong class="font-bold text-[#00CED1] tracking-wide">我的思考与延伸：</strong>我认为舆情工作的价值不止于“记录”，更在于“预测”与“优化”，它完全可以和GEO（集团执行办公室）的品牌声量管理与SEO战略深度结合。</p>
+                                    
+                                    <p class="font-bold text-[#00CED1] tracking-wide pt-4">构想的协同工作流：</p>
+                                    
+                                    <div class="flex flex-col md:flex-row justify-between items-center gap-y-8 my-4 w-full">
+                                        <div class="relative flex-1 text-center p-4 bg-white/5 rounded-lg border border-white/20">
+                                            <p>数据输入</p>
+                                            <div class="flow-arrow hidden md:block">›</div>
+                                        </div>
+                                        <div class="relative flex-1 text-center p-4 bg-white/5 rounded-lg border border-white/20 md:ml-10">
+                                            <p>智能提炼</p>
+                                            <div class="flow-arrow hidden md:block">›</div>
+                                        </div>
+                                        <div class="relative flex-1 text-center p-4 bg-white/5 rounded-lg border border-white/20 md:ml-10">
+                                            <p>SEO反哺</p>
+                                            <div class="flow-arrow hidden md:block">›</div>
+                                        </div>
+                                        <div class="relative flex-1 text-center p-4 bg-white/5 rounded-lg border border-white/20 md:ml-10">
+                                            <p>GEO决策支持</p>
+                                        </div>
+                                    </div>
+    
+                                    <p><strong class="font-bold text-[#00CED1] tracking-wide">未来可交付成果：</strong>SEO关键词策略表 (指导内容生产)、品牌声量月度/季度洞察报告 (支持GEO决策)。</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="border-t border-white/10 pt-16 reveal">
-                    <h3 class="text-3xl font-semibold mb-4 text-white border-l-4 border-[#00CED1] pl-4">AI 视频工作流</h3>
-                    <p class="font-light opacity-80 mb-6">工具：豆包+Lovart+即梦 | 推荐模型：Seedance 2.0 等</p>
-                    <div class="mb-10 w-full max-w-3xl mx-auto rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl">
-                        <video id="ai-video-demo" controls src="ai-video-demo.mp4" class="w-full outline-none"></video>
-                    </div>
-                    <div class="bg-white/5 rounded-2xl p-6 md:p-8 mb-10 border border-white/10">
-                        <h4 class="text-xl mb-4 text-[#D7E2EA]">应用场景：</h4>
-                        <ul class="list-disc pl-5 opacity-80 space-y-2 font-light text-base">
-                            <li>品牌宣传短视频：快速生成品牌形象片、宣发短视频。</li>
-                            <li>图文转视频：将公众号推文、行业科普一键生成解说短视频。</li>
-                            <li>数字人播报解说：搭建虚拟数字人形象，替代真人出镜。</li>
-                        </ul>
-                    </div>
-                    
-                    <h4 class="text-xl mb-6 text-[#D7E2EA]">工作流演示：</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-12">
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 1 豆包生成分镜表</p>
-                            <img src="视频1.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 2 Lovart 故事板</p>
-                            <img src="视频2.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 3 放入 Lovart 提示词</p>
-                            <img src="视频3.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 4 即梦生成视频</p>
-                            <img src="视频4.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 5 剪映串联剪辑</p>
-                            <img src="视频5.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-t border-white/10 pt-16 reveal">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                        <h3 class="text-3xl font-semibold text-white border-l-4 border-[#00CED1] pl-4">AI 交互数字人工作流</h3>
-                        <a href="https://beryllle.github.io/talkto7/" target="_blank" class="mt-4 md:mt-0 rounded-full border border-[#D7E2EA] text-[#D7E2EA] px-6 py-2 text-sm uppercase hover:bg-white/10 transition">在线 Demo 测试</a>
-                    </div>
-                    <p class="font-light opacity-80 mb-8">工具：GPT、VS Code、Lovart、即梦、Github (Vibe Design + Coding)</p>
-                    
-                    <div class="mb-10">
-                        <img src="ai数字人.png" class="w-[80%] mx-auto block rounded-[20px] border border-white/10 shadow-2xl">
-                    </div>
-                    <div class="mb-12 w-[30%] mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                        <video controls src="ai数字人.mp4" class="w-full outline-none block"></video>
-                    </div>
-                    
-                    <!-- 优化：将“应用场景：”标题放入框内 -->
-                    <div class="bg-white/5 rounded-2xl p-6 md:p-8 mb-12 border border-white/10">
-                        <h4 class="text-xl mb-6 text-[#D7E2EA] font-semibold border-b border-white/10 pb-3">应用场景：</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-6 text-white border-l-4 border-[#00CED1] pl-4">三、亮点成果 · AI驱动业务创新</h3>
+                    <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl text-base font-light opacity-90 leading-relaxed space-y-8">
+                        <p class="text-lg text-center bg-clip-text text-transparent bg-gradient-to-br from-cyan-300 to-blue-500 py-2 font-semibold">核心价值：将AIGC从“有趣的玩具”升级为“提效的工具”，在一个月内，为团队沉淀了一套覆盖图文、视频、交互三大内容模态的AI工作流，初步估算可将同类常规物料的制作周期缩短约30%，实现了显著的降本增效。</p>
+                        
+                        <div class="space-y-12">
                             <div>
-                                <img src="应用1.png" class="w-full h-auto object-cover rounded-xl mb-4 border border-white/5">
-                                <h4 class="text-base text-[#D7E2EA] mb-2 font-medium">1. 线下活动引流互动</h4>
-                                <p class="text-sm font-light opacity-80 leading-relaxed">落地展会竖版大屏，AI 数字人实时智能答疑、品牌介绍。</p>
+                                <h4 class="text-lg md:text-xl font-semibold mb-4 text-white">1. AI海报/视频工作流：赋能“数说十五五”系列内容</h4>
+                                <p class="mb-6">应用场景：未来“数说十五五”等系列策划，需要大量数据可视化图表、海报及解读短视频。现有AI工作流（Lovart+即梦）可快速、批量生成风格统一的视觉物料，极大提升内容生产效率。</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                     <img src="ai海报.png" alt="AI海报" class="w-full h-auto object-contain rounded-xl shadow-lg">
+                                     <video controls src="ai-video-demo.mp4" class="w-full h-auto object-contain rounded-xl shadow-lg"></video>
+                                </div>
                             </div>
+                            
                             <div>
-                                <img src="应用2.png" class="w-full h-auto object-cover rounded-xl mb-4 border border-white/5">
-                                <h4 class="text-base text-[#D7E2EA] mb-2 font-medium">2. 园区文化墙/展厅</h4>
-                                <p class="text-sm font-light opacity-80 leading-relaxed">作为智能文化数字讲解员，介绍发展历程、企业文化。</p>
+                                <h4 class="text-lg md:text-xl font-semibold mb-4 text-white">2. AI交互数字人：革新“专委会活动”参会体验</h4>
+                                <p class="mb-6">应用场景：在未来的专委会或行业峰会上，可部署AI数字人作为“永不离线的智能助手”。<br>
+                                    <strong class="text-[#00CED1]">会前：</strong>作为“智能会议议程讲解员”，介绍大会嘉宾、议程亮点。<br>
+                                    <strong class="text-[#00CED1]">会中：</strong>作为“现场互动引导员”，为与会者提供路线指引、嘉宾介绍、资料查询服务。<br>
+                                    <strong class="text-[#00CED1]">会后：</strong>作为“知识沉淀数字档案员”，持续为后续查询者提供智能问答服务。
+                                </p>
+                                <div class="mb-8">
+                                    <video controls src="ai数字人.mp4" class="w-[80%] md:w-[20%] mx-auto block h-auto object-contain rounded-xl shadow-lg"></video>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <img src="应用1.png" class="w-full h-auto object-cover rounded-xl">
+                                    <img src="应用2.png" class="w-full h-auto object-cover rounded-xl">
+                                    <img src="应用3.png" class="w-full h-auto object-cover rounded-xl">
+                                </div>
                             </div>
-                            <div>
-                                <img src="应用3.png" class="w-full h-auto object-cover rounded-xl mb-4 border border-white/5">
-                                <h4 class="text-base text-[#D7E2EA] mb-2 font-medium">3. 对外访客智能接待</h4>
-                                <p class="text-sm font-light opacity-80 leading-relaxed">提供迎宾问候、参观路线指引，实现无人化智能接待。</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h4 class="text-xl mb-6 text-[#D7E2EA]">工作流演示：</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-12 opacity-90">
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 1 GPT沟通需求</p>
-                            <img src="数字人1.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 2 确定技术方案</p>
-                            <img src="数字人2.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 3 VS Code编辑代码</p>
-                            <img src="数字人3.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 4 Lovart生成数字人</p>
-                            <img src="数字人4.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 5 即梦生成动画</p>
-                            <img src="数字人5.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 6 动画融入代码</p>
-                            <img src="数字人6.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 7 接入豆包及API</p>
-                            <img src="数字人7.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 8 Render部署后端</p>
-                            <img src="数字人8.png" class="w-full rounded-xl border border-white/10">
-                        </div>
-                        <div class="workflow-step">
-                            <p class="mb-2 opacity-70 font-medium text-base truncate">STEP 9 Github发布</p>
-                            <img src="数字人9.png" class="w-full rounded-xl border border-white/10">
                         </div>
                     </div>
                 </div>
@@ -480,53 +273,70 @@
             </div>
         </section>
 
-        <!-- 6. REFLECTION (复盘展望) -->
         <section id="reflection" class="bg-white text-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[60px] py-24 px-6 md:px-10 z-50 relative -mt-10">
             <h2 class="font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-16 leading-none reveal">REFLECTION</h2>
             
-            <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-12 reveal delay-100">
-                <div class="md:w-1/2">
-                    <h3 class="text-2xl font-bold uppercase mb-6 border-b-2 border-black pb-2">体悟与发现</h3>
-                    <ul class="list-disc pl-5 space-y-4 opacity-80 font-medium">
+            <div class="max-w-5xl mx-auto space-y-16">
+                <div class="reveal">
+                    <ul class="list-disc pl-5 space-y-4 opacity-80 font-medium text-base md:text-lg">
                         <li>目前在物料制作、公众号排版、舆情统计上已积累基础经验，但尚未形成完整的内容运营闭环，全链路能力仍需打磨。</li>
                         <li>未来将重点拓展内容渠道运营能力，学习小红书、播客、视频号等平台的内容逻辑与运营方法。</li>
                         <li>提升跨部门沟通与需求拆解能力，更精准地对接业务需求，减少反复修改，提升整体输出效率。</li>
                         <li>强化数据思维，学会用传播数据、用户反馈反推内容与渠道优化，形成运营闭环。</li>
                     </ul>
                 </div>
-                <div class="md:w-1/2">
-                    <h3 class="text-2xl font-bold uppercase mb-6 border-b-2 border-black pb-2">未来规划</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-bold text-lg">1. 转型账号运营全链路负责人</h4>
-                            <p class="font-light opacity-70 mt-1">以视觉能力为基础，补齐内容策划、用户运营、数据分析能力，支撑账号全链路工作。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg">2. 深耕 AI + 视觉运营复合竞争力</h4>
-                            <p class="font-light opacity-70 mt-1">用 AI 工具高效生成平台物料，结合 vibe design 与代码能力，打造账号专属交互内容。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg">3. 强化跨平台运营与数据思维</h4>
-                            <p class="font-light opacity-70 mt-1">熟悉各平台规则与用户偏好，用数据指导内容优化，提升账号传播效率。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg">4. 成长为品牌传播复合型人才</h4>
-                            <p class="font-light opacity-70 mt-1">主动参与账号活动策划与跨平台联动，实现视觉、运营、传播的深度融合。</p>
-                        </div>
+            </div>
+        </section>
+        
+        <section id="outlook" class="bg-white text-[#0C0C0C] pt-12 pb-24 px-6 md:px-10 z-50 relative">
+            <h2 class="font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-16 leading-none reveal">OUTLOOK</h2>
+            <div class="max-w-5xl mx-auto reveal">
+                <div class="space-y-6">
+                    <p class="text-lg md:text-xl font-bold text-center text-gray-800 py-4">以成长为“策略+视觉+技术”的品牌传播复合型人才为目标</p>
+                    <div>
+                        <h4 class="font-bold text-lg">1. 深化策略能力：转型账号运营全链路负责人</h4>
+                        <p class="font-light opacity-70 mt-1">以现有视觉能力为基础，主动学习数据分析、用户运营及内容策划，补齐能力短板，逐步承担起账号的全链路管理工作。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg">2. 夯实技术壁垒：深耕 AI + 视觉运营复合竞争力</h4>
+                        <p class="font-light opacity-70 mt-1">持续探索AIGC工具在内容生产中的应用，结合Vibe Design与代码能力，为账号打造如交互式图表、数字人短视频等独特的、高技术门槛的专属内容。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg">3. 拓展平台视野：强化跨平台运营与数据思维</h4>
+                        <p class="font-light opacity-70 mt-1">深入研究小红书、视频号、小宇宙等不同平台的社区规则与用户偏好，学会用数据指导内容分发与迭代，最大化传播效率。</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="mt-32 text-center opacity-30 text-xs font-medium tracking-widest uppercase reveal">
-                © 2026 王雪萌 XUEMENG WANG. 实习期述职汇报.
+        </section>
+
+        <section id="next-steps" class="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[60px] px-6 md:px-10 py-24 relative z-40 -mt-10">
+            <h2 class="hero-heading font-black uppercase text-center text-[10vw] sm:text-[8vw] mb-16 reveal">NEXT STEPS</h2>
+
+            <div class="max-w-5xl mx-auto space-y-12">
+                <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl reveal">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-4 text-white">1. 主导跟进：《38号专刊》项目</h3>
+                    <ul class="list-disc pl-5 space-y-3 font-light opacity-90 leading-relaxed text-base">
+                        <li><strong class="text-[#00CED1]">内容策划：</strong>基于对中心各业务线的理解，主动与各部门沟通，挖掘专刊的选题亮点与核心报道方向。</li>
+                        <li><strong class="text-[#00CED1]">视觉定调：</strong>为专刊设计整体视觉风格（VI），包括版式、字体、色彩规范，确保其品牌调性与中心形象一致。</li>
+                        <li><strong class="text-[#00CED1]">流程管理：</strong>作为项目跟进人，拉通设计、文案、审核等各环节，制定明确的时间排期（Timeline），确保专刊高质量、准时交付。</li>
+                    </ul>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl reveal">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-4 text-white">2. 开拓运营：中心公域渠道账号（小红书）</h3>
+                     <ul class="list-disc pl-5 space-y-3 font-light opacity-90 leading-relaxed text-base">
+                        <li><strong class="text-[#00CED1]">经验迁移：</strong>我过往曾独立运营账号至5000+粉丝，对小红书的社区文化、内容偏好及“笔记”推流机制有深入理解。</li>
+                        <li><strong class="text-[#00CED1]">启动规划：</strong>将借鉴成功经验，为中心的小红书账号制定从0到1的冷启动策略，包括账号定位、首批内容规划 (人设IP类/干货知识类/行业观察类)、以及初期流量获取方案。</li>
+                    </ul>
+                </div>
+            </div>
+             <div class="mt-32 text-center opacity-30 text-xs font-medium tracking-widest uppercase reveal">
+                © 2026 王雪萌 XUEMENG WANG 实习期述职汇报.
             </div>
         </section>
     </div>
 
-    <!-- JavaScript: 滚动渐现 & 丝滑渐变光晕跟随 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            /* 1. 滚动渐显动画逻辑 (Scroll Reveal) */
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -541,26 +351,21 @@
             
             reveals.forEach(reveal => observer.observe(reveal));
 
-            /* 2. 丝滑光晕鼠标跟随 (Gradient Glow Effect) */
             const glow = document.getElementById('cursor-glow');
             let mouseX = window.innerWidth / 2;
             let mouseY = window.innerHeight / 2;
             let currentX = mouseX;
             let currentY = mouseY;
 
-            // 监听鼠标位置
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
             });
 
-            // 运用线性插值实现丝滑跟随
             function animateGlow() {
-                // 缓动系数，越小越平滑/延迟越大
                 currentX += (mouseX - currentX) * 0.1;
                 currentY += (mouseY - currentY) * 0.1;
                 
-                // 更新光晕的位置，减去一半(200px)使其居中于鼠标
                 glow.style.transform = `translate3d(${currentX - 200}px, ${currentY - 200}px, 0)`;
                 
                 requestAnimationFrame(animateGlow);
